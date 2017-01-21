@@ -26,8 +26,12 @@ public class Alarm_Receiver extends WakefulBroadcastReceiver{
             alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
         Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
-        ringtone.play();
-
+        if(!ringtone.isPlaying()) {
+            ringtone.play();
+        }
+        else{
+            ringtone.stop();
+        }
         ComponentName comp = new ComponentName(context.getPackageName(), RingtonePlayerService.class.getName());
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);

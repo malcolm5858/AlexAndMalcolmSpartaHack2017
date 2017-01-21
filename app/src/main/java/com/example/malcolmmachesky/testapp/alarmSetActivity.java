@@ -57,7 +57,17 @@ public class alarmSetActivity extends AppCompatActivity {
                 updateTime();
             }
         });
-
+       AlarmOnOff.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!AlarmOnOff.isChecked()){
+                   Intent intent = new Intent(alarmSetActivity.this, Alarm_Receiver.class);
+                   pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intent,0);
+                   AlarmManager alarmmanager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                   alarmmanager.cancel(pendingIntent);
+               }
+           }
+       });
 
 
 
@@ -101,7 +111,7 @@ public class alarmSetActivity extends AppCompatActivity {
                     alarmManager.setExact(AlarmManager.RTC, dateTime.getTimeInMillis(), pendingIntent);
                 }
                 else{
-                    alarmManager.cancel(pendingIntent);
+
 
                 }
 
