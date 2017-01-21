@@ -21,15 +21,23 @@ public class alarmSetActivity extends AppCompatActivity {
     Calendar dateTime = Calendar.getInstance();
     int Hour;
     int Minute;
-    boolean alarmCreated = false;
-    boolean alarmCreatedtwo = false;
     private Button startTimePicker;
     private TextView timeAlarm;
     private Switch AlarmOnOff;
     PendingIntent pendingIntent;
-    Context context;
-    Intent intentAlarm;
     AlarmManager alarmManager;
+    public static alarmSetActivity inst;
+
+    public static alarmSetActivity instance(){
+        return inst;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        inst = this;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,6 @@ public class alarmSetActivity extends AppCompatActivity {
         startTimePicker = (Button) findViewById(R.id.TimePickerStart);
         timeAlarm = (TextView) findViewById(R.id.alarmTime);
         AlarmOnOff = (Switch) findViewById(R.id.AlarmOnOff);
-        this.context = this;
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
@@ -50,24 +57,7 @@ public class alarmSetActivity extends AppCompatActivity {
                 updateTime();
             }
         });
-        AlarmOnOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(alarmCreatedtwo) {
-                    stopAlarm();
-                    alarmCreatedtwo =sharedPref.getBoolean("alarmCreatedtwo", false);
-                    alarmCreated = sharedPref.getBoolean("alarmCreated", false);
-                }else{
-                    if (!alarmCreated) {
-                        AlarmOnOff.setChecked(false);
 
-                    } else {
-                        startAlarm();
-                        alarmCreatedtwo = sharedPref.getBoolean("alarmCreatedtwo", true);
-                }
-                }
-            }
-        });
 
 
 
@@ -89,23 +79,6 @@ public class alarmSetActivity extends AppCompatActivity {
         new TimePickerDialog(this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), false).show();
     }
 
-    private void startAlarm(){
-        intentAlarm = new Intent(this, Alarm_Receiver.class);
-
-        intentAlarm.putExtra("extra", "alarm on");
-
-        pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), pendingIntent);
-    }
-    private void stopAlarm(){
-
-        alarmManager.cancel(pendingIntent);
-
-        intentAlarm.putExtra("extra", "alarm off");
-
-        sendBroadcast(intentAlarm);
-    }
 
 
     TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
@@ -113,18 +86,25 @@ public class alarmSetActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             final SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
             final SharedPreferences.Editor editor = sharedPref.edit();
-            if(alarmCreatedtwo){
-                return;
-            }else {
+
                 dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 dateTime.set(Calendar.MINUTE, minute);
 
                 Hour = hourOfDay;
                 Minute = minute;
+
                 outputTime();
-                alarmCreated = true;
-                editor.putBoolean("alarmCreated", true);
-            }
+
+                if(AlarmOnOff.isChecked()){
+                    Intent myIntent = new Intent(alarmSetActivity.this, Alarm_Receiver.class);
+                    pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, myIntent,0);
+                    alarmManager.setExact(AlarmManager.RTC, dateTime.getTimeInMillis(), pendingIntent);
+                }
+                else{
+                    alarmManager.cancel(pendingIntent);
+
+                }
+
         }
     };
 
