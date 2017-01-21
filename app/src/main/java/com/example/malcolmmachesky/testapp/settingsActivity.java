@@ -1,10 +1,11 @@
 package com.example.malcolmmachesky.testapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Switch;
 
 public class settingsActivity extends AppCompatActivity {
@@ -20,16 +21,20 @@ public class settingsActivity extends AppCompatActivity {
     boolean cantStop = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         setTitle("Settings");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         Intent intent = getIntent();
-        soothing = intent.getBooleanExtra(MainActivity.MESSAGE,false);
-        minuteAlert = intent.getBooleanExtra(MainActivity.MESSAGEALERT, false);
-        snooze = intent.getBooleanExtra(MainActivity.MESSAGESNOOZE, false);
-        cantStop = intent.getBooleanExtra(MainActivity.MESSAGECANTSTOP, false);
+       // soothing = intent.getBooleanExtra(MainActivity.MESSAGE,false);
+        soothing = sharedPref.getBoolean("soothing", true);
+        minuteAlert = sharedPref.getBoolean("minuteAlert", true);
+        snooze = sharedPref.getBoolean("snooze", true);
+        cantStop = sharedPref.getBoolean("cantStop", true);
+
         if(soothing){
             ((Switch) findViewById(R.id.SoothingNoise)).setChecked(true);
+
         }
         else {
             ((Switch) findViewById(R.id.SoothingNoise)).setChecked(false);
@@ -56,34 +61,52 @@ public class settingsActivity extends AppCompatActivity {
 
 
     public void onCheck(View view){
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         boolean checked = ((Switch) view).isChecked();
         switch(view.getId()){
             case R.id.SoothingNoise:
                 if (checked){
                     soothing = true;
+                   editor.putBoolean("soothing", true);
+                   editor.apply();
                 }else{
                     soothing = false;
+                    editor.putBoolean("soothing", false);
+                    editor.apply();
                 }
                 break;
             case R.id.MinuteAlert:
                 if(checked){
                     minuteAlert = true;
+                    editor.putBoolean("minuteAlert", true);
+                    editor.apply();
                 }else{
                     minuteAlert = false;
+                    editor.putBoolean("minuteAlert", false);
+                    editor.apply();
                 }
                 break;
             case R.id.Snooze:
                 if(checked){
                     snooze = true;
+                    editor.putBoolean("snooze", true);
+                    editor.apply();
                 }else{
                     snooze = false;
+                    editor.putBoolean("snooze", false);
+                    editor.apply();
                 }
                 break;
             case R.id.CantStop:
                 if(checked){
                     cantStop = true;
+                    editor.putBoolean("cantStop", true);
+                    editor.apply();
                 }else{
                     cantStop = false;
+                    editor.putBoolean("cantStop", false);
+                    editor.apply();
                 }
                 break;
         }
