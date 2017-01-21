@@ -27,7 +27,7 @@ public class alarmSetActivity extends AppCompatActivity {
     private Switch AlarmOnOff;
     PendingIntent pendingIntent;
     Context context;
-
+    Intent intentAlarm;
     AlarmManager alarmManager;
 
     @Override
@@ -86,7 +86,9 @@ public class alarmSetActivity extends AppCompatActivity {
     }
 
     private void startAlarm(){
-        Intent intentAlarm  = new Intent(this, Alarm_Receiver.class);
+        intentAlarm = new Intent(this, Alarm_Receiver.class);
+
+        intentAlarm.putExtra("extra", "alarm on");
 
         pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -94,6 +96,10 @@ public class alarmSetActivity extends AppCompatActivity {
     }
     private void stopAlarm(){
         alarmManager.cancel(pendingIntent);
+
+        intentAlarm.putExtra("extra", "alarm off");
+
+        sendBroadcast(intentAlarm);
     }
 
 
