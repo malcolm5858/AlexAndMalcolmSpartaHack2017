@@ -23,31 +23,21 @@
         android:onClick="onCheck"
         />
 
-    <Switch
-        android:text="@string/MinuteAlert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/MinuteAlert"
-        android:layout_below="@+id/SoothingNoise"
-        android:layout_alignStart="@+id/SoothingNoise"
-        android:onClick="onCheck"/>
-
-    <Button
-        android:text="@string/saveMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button4"
-        android:onClick="backToMenu"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="79dp" />
+    <!--<Button-->
+        <!--android:text="@string/saveMenu"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/button4"-->
+        <!--android:onClick="backToMenu"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="79dp" />-->
 
     <Switch
         android:text="@string/cantStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="38dp"
         android:id="@+id/CantStop"
         android:onClick="onCheck"
         android:layout_below="@+id/Snooze"
@@ -57,11 +47,20 @@
         android:text="@string/Snooze"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/Snooze"
         android:onClick="onCheck"
-        android:layout_marginStart="27dp"
         android:layout_below="@+id/MinuteAlert"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/MinuteAlert" />
+
+    <Switch
+        android:text="@string/MinuteAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:id="@+id/MinuteAlert"
+        android:onClick="onCheck"
+        android:layout_below="@+id/SoothingNoise"
+        android:layout_alignStart="@+id/SoothingNoise" />
 
 </RelativeLayout>
