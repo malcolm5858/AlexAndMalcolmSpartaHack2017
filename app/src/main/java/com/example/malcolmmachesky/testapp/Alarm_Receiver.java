@@ -9,33 +9,42 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by malcolmmachesky on 1/21/17.
  */
 
 public class Alarm_Receiver extends WakefulBroadcastReceiver{
+    Timer timer = new Timer();
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
        alarmSetActivity inst = alarmSetActivity.instance();
 
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if(alarmUri == null){
             alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
-        Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
+        final Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
         if(!ringtone.isPlaying()) {
             ringtone.play();
+
+
         }
-        else{
+        else if (ringtone.isPlaying()){
             ringtone.stop();
         }
         ComponentName comp = new ComponentName(context.getPackageName(), RingtonePlayerService.class.getName());
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
     }
+
+
 
 
 
