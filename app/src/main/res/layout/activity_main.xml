@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            tools:text="Alarm Set"
+            tools:text="@string/bt1"
             android:onClick="openAlarmSet"/>
 
         <Button
@@ -30,13 +30,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
-            tools:text="Ambient sounds" />
+            tools:text="@string/btn2"
+            android:onClick="openAmbientSounds"/>
 
         <Button
             android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3"
-            tools:text="Settings" />
+            tools:text="@string/btn3"
+            android:onClick="openSettings"/>
     </LinearLayout>
 </RelativeLayout>
