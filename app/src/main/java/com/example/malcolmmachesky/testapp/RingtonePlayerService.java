@@ -29,16 +29,16 @@ public class RingtonePlayerService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendNotification("Wake up Malcolm!");
+        sendNotification("Wake up Malcolm you sleepy head, you have not had enough sleep and need some, but not right now!");
     }
 
     private void sendNotification(String msg){
         alarmNotifcationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, alarmSetActivity.class),0);
-        NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle("Alarm").setSmallIcon(R.drawable.notification_icon).setStyle(new NotificationCompat.BigTextStyle().bigText(msg)).setContentText(msg);
-        alamNotificationBuilder.setContentIntent(contentIntent);
-        alarmNotifcationManager.notify(1, alamNotificationBuilder.build());
+        NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(this).setContentTitle("Alarm").setSmallIcon(R.drawable.notification_icon).setStyle(new NotificationCompat.BigTextStyle().bigText(msg)).setContentText(msg);
+        alarmNotificationBuilder.setContentIntent(contentIntent);
+        alarmNotifcationManager.notify(1, alarmNotificationBuilder.build());
 
 
     }
