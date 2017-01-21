@@ -25,8 +25,6 @@ public class settingsActivity extends AppCompatActivity {
         setTitle("Settings");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Intent intent = getIntent();
-       // soothing = intent.getBooleanExtra(MainActivity.MESSAGE,false);
         soothing = sharedPref.getBoolean("soothing", true);
         minuteAlert = sharedPref.getBoolean("minuteAlert", true);
         snooze = sharedPref.getBoolean("snooze", true);

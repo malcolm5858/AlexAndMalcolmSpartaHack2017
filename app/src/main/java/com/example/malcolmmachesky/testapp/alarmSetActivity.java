@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class alarmSetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPref.edit();
         setTitle("Alarm Set");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_set);
@@ -52,15 +55,16 @@ public class alarmSetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(alarmCreatedtwo) {
                     stopAlarm();
-                    alarmCreatedtwo = false;
-                    alarmCreated = false;
+                    alarmCreatedtwo =sharedPref.getBoolean("alarmCreatedtwo", false);
+                    alarmCreated = sharedPref.getBoolean("alarmCreated", false);
                 }else{
                     if (!alarmCreated) {
                         AlarmOnOff.setChecked(false);
+
                     } else {
                         startAlarm();
-                        alarmCreatedtwo = true;
-                    }
+                        alarmCreatedtwo = sharedPref.getBoolean("alarmCreatedtwo", true);
+                }
                 }
             }
         });
@@ -95,6 +99,7 @@ public class alarmSetActivity extends AppCompatActivity {
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), pendingIntent);
     }
     private void stopAlarm(){
+
         alarmManager.cancel(pendingIntent);
 
         intentAlarm.putExtra("extra", "alarm off");
@@ -106,6 +111,8 @@ public class alarmSetActivity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            final SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sharedPref.edit();
             if(alarmCreatedtwo){
                 return;
             }else {
@@ -116,6 +123,7 @@ public class alarmSetActivity extends AppCompatActivity {
                 Minute = minute;
                 outputTime();
                 alarmCreated = true;
+                editor.putBoolean("alarmCreated", true);
             }
         }
     };
