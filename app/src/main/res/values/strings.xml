@@ -3,4 +3,10 @@
     <string name="bt1">Alarm Set</string>
     <string name="btn2">Ambient, Alarm and Static Music</string>
     <string name="btn3">Settings</string>
+    <string name="AmbientMusic">Ambient Music</string>
+    <string name="RainSounds">Soothing Noise</string>
+    <string name="MinuteAlert">20 Minute alert</string>
+    <string name="Snooze">Snooze</string>
+    <string name="cantStop">Can\'t stop for 1 minute</string>
+    <string name="saveMenu">Save and Exit to Menu</string>
 </resources>

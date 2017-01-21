@@ -10,4 +10,57 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.malcolmmachesky.testapp.settingsActivity">
 
+
+    <Switch
+        android:text="@string/RainSounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SoothingNoise"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp"
+        android:onClick="onCheck"
+        />
+
+    <Switch
+        android:text="@string/MinuteAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/MinuteAlert"
+        android:layout_below="@+id/SoothingNoise"
+        android:layout_alignStart="@+id/SoothingNoise"
+        android:onClick="onCheck"/>
+
+    <Switch
+        android:text="@string/Snooze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MinuteAlert"
+        android:layout_alignStart="@+id/MinuteAlert"
+        android:layout_marginTop="12dp"
+        android:id="@+id/Snooze"
+        android:onClick="onCheck"/>
+
+    <Switch
+        android:text="@string/cantStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Snooze"
+        android:layout_alignStart="@+id/Snooze"
+        android:layout_marginTop="25dp"
+        android:id="@+id/CantStop"
+        android:onClick="onCheck"/>
+
+    <Button
+        android:text="@string/saveMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:id="@+id/button4"
+        android:layout_below="@+id/CantStop"
+        android:layout_centerHorizontal="true"
+        android:onClick="backToMenu"/>
+
 </RelativeLayout>
