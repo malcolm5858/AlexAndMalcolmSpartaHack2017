@@ -1,6 +1,9 @@
 package com.example.malcolmmachesky.testapp;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -33,6 +36,24 @@ public class RingtonePlayerService extends Service {
 
         String state = intent.getExtras().getString("extra");
 
+
+        NotificationManager notifymanager = (NotificationManager)
+                getSystemService(NOTIFICATION_SERVICE);
+        Intent intent_main_activity = new Intent(this.getApplicationContext(), alarmSetActivity.class);
+
+        PendingIntent pending_intent_main_Activity = PendingIntent.getActivity(this,0,intent_main_activity, 0);
+
+        Notification notification_popup = new Notification.Builder(this)
+                .setContentTitle("An alarm is going off!")
+                .setContentText("Click Me!")
+                .setSmallIcon(R.drawable.notification_icon)
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                .setContentIntent(pending_intent_main_Activity)
+                .setAutoCancel(true)
+                .build();
+
+
+        notifymanager.notify(0, notification_popup);
 
 
         assert state != null;
@@ -85,9 +106,9 @@ public class RingtonePlayerService extends Service {
     @Override
     public void onDestroy() {
 
+        super.onDestroy();
+        this.isRunning = false;
 
-        // Tell the user we stopped.
-        Toast.makeText(this, "On Destroyed called", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -21,6 +21,7 @@
         <receiver android:name=".Alarm_Receiver"/>
         <service android:name=".RingtonePlayerService"
             android:enabled="true"/>
+        <uses-permission android:name="android.permission.VIBRATE" />
     </application>
 
 </manifest>
