@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -19,11 +20,14 @@ public class alarmSetActivity extends AppCompatActivity {
     Calendar dateTime = Calendar.getInstance();
     int Hour;
     int Minute;
+    boolean alarmCreated = false;
+    boolean alarmCreatedtwo = false;
     private Button startTimePicker;
     private TextView timeAlarm;
+    private Switch AlarmOnOff;
     PendingIntent pendingIntent;
     Context context;
-    Intent intentAlarm;
+
     AlarmManager alarmManager;
 
     @Override
@@ -33,7 +37,7 @@ public class alarmSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm_set);
         startTimePicker = (Button) findViewById(R.id.TimePickerStart);
         timeAlarm = (TextView) findViewById(R.id.alarmTime);
-        intentAlarm = new Intent(this, Alarm_Receiver.class);
+        AlarmOnOff = (Switch) findViewById(R.id.AlarmOnOff);
         this.context = this;
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
@@ -43,6 +47,25 @@ public class alarmSetActivity extends AppCompatActivity {
                 updateTime();
             }
         });
+        AlarmOnOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alarmCreatedtwo) {
+                    stopAlarm();
+                    alarmCreatedtwo = false;
+                    alarmCreated = false;
+                }else{
+                    if (!alarmCreated) {
+                        AlarmOnOff.setChecked(false);
+                    } else {
+                        startAlarm();
+                        alarmCreatedtwo = true;
+                    }
+                }
+            }
+        });
+
+
 
     }
 
@@ -63,25 +86,33 @@ public class alarmSetActivity extends AppCompatActivity {
     }
 
     private void startAlarm(){
+        Intent intentAlarm  = new Intent(this, Alarm_Receiver.class);
+
         pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime.getTimeInMillis(), pendingIntent);
+    }
+    private void stopAlarm(){
+        alarmManager.cancel(pendingIntent);
     }
 
 
     TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            dateTime.set(Calendar.MINUTE, minute);
+            if(alarmCreatedtwo){
+                return;
+            }else {
+                dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                dateTime.set(Calendar.MINUTE, minute);
 
-            Hour = hourOfDay;
-            Minute = minute;
-            outputTime();
-            startAlarm();
+                Hour = hourOfDay;
+                Minute = minute;
+                outputTime();
+                alarmCreated = true;
+            }
         }
     };
-
 
 
 }

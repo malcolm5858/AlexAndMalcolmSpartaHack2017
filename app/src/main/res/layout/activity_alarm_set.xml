@@ -25,4 +25,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:id="@+id/alarmTime" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AlarmOnOff"
+        android:layout_alignBaseline="@+id/TimePickerStart"
+        android:layout_alignBottom="@+id/TimePickerStart"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp" />
 </RelativeLayout>

@@ -17,6 +17,10 @@
         <activity android:name=".alarmSetActivity" />
         <activity android:name=".ambientSoundsActivity" />
         <activity android:name=".settingsActivity"></activity>
+
+        <receiver android:name=".Alarm_Receiver"/>
+        <service android:name=".RingtonePlayerService"
+            android:enabled="true"/>
     </application>
 
 </manifest>
