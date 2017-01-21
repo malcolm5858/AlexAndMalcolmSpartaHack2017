@@ -17,11 +17,12 @@
         <activity android:name=".alarmSetActivity" />
         <activity android:name=".ambientSoundsActivity" />
         <activity android:name=".settingsActivity"></activity>
-        <uses-permission android:name="android.permission.WAKE_LOCK" />
+
         <receiver android:name=".Alarm_Receiver"/>
         <service android:name=".RingtonePlayerService"
             android:enabled="true"/>
-        <uses-permission android:name="android.permission.VIBRATE" />
-    </application>
 
+    </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>
