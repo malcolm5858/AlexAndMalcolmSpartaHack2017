@@ -111,8 +111,7 @@ public class alarmSetActivity extends AppCompatActivity {
                     alarmManager.setExact(AlarmManager.RTC, dateTime.getTimeInMillis(), pendingIntent);
                 }
                 else{
-
-
+                    alarmManager.cancel(pendingIntent);
                 }
 
         }
