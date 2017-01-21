@@ -7,6 +7,7 @@ public class ambientSoundsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Ambient Sounds");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ambient_sounds);
     }

@@ -7,6 +7,7 @@ public class alarmSetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Alarm Set");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_set);
     }

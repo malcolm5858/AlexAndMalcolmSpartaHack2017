@@ -18,27 +18,24 @@
         android:layout_alignParentTop="true">
 
         <Button
-            android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            tools:text="@string/bt1"
-            android:onClick="openAlarmSet"/>
+            android:onClick="openAlarmSet"
+            android:text="@string/bt1" />
 
         <Button
-            android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
-            tools:text="@string/btn2"
-            android:onClick="openAmbientSounds"/>
+            android:onClick="openAmbientSounds"
+            android:text="@string/btn2" />
 
         <Button
-            android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3"
-            tools:text="@string/btn3"
-            android:onClick="openSettings"/>
+            android:onClick="openSettings"
+            android:text="@string/btn3" />
     </LinearLayout>
 </RelativeLayout>
