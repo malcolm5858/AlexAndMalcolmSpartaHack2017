@@ -9,19 +9,18 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.os.CountDownTimer;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by malcolmmachesky on 1/21/17.
  */
 
 public class Alarm_Receiver extends WakefulBroadcastReceiver{
-    Timer timer = new Timer();
 
 
     @Override
+
     public void onReceive(Context context, Intent intent) {
 
        alarmSetActivity inst = alarmSetActivity.instance();
@@ -32,6 +31,12 @@ public class Alarm_Receiver extends WakefulBroadcastReceiver{
         }
         final Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
         if(!ringtone.isPlaying()) {
+            new CountDownTimer(30000,1000){
+
+                void OnFinish(){
+                    ringtone.stop();
+                }
+            }.start;
             ringtone.play();
 
 
