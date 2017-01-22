@@ -10,4 +10,5 @@
     <string name="cantStop">Can\'t stop for 1 minute</string>
     <string name="saveMenu">Save and Exit to Menu</string>
     <string name="TimePicker">Pick Alarm Time</string>
+    <string name="NiceRain">Toggle Rain Noise</string>
 </resources>

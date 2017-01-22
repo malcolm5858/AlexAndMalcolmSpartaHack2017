@@ -28,7 +28,7 @@ public class alarmSetActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
     public static alarmSetActivity inst;
-    public Boolean onOff;
+    public Boolean RainOnOff = false;
 
     public static alarmSetActivity instance(){
         return inst;
@@ -43,15 +43,22 @@ public class alarmSetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         setTitle("Alarm Set");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_set);
         startTimePicker = (Button) findViewById(R.id.TimePickerStart);
         timeAlarm = (TextView) findViewById(R.id.alarmTime);
         AlarmOnOff = (Switch) findViewById(R.id.AlarmOnOff);
+        RainOnOff = sharedPref.getBoolean("RainOnOff", false);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if(RainOnOff){
+            ((Switch) findViewById(R.id.RainIO)).setChecked(true);
+
+        }
+        else {
+            ((Switch) findViewById(R.id.RainIO)).setChecked(false);
+        }
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +66,11 @@ public class alarmSetActivity extends AppCompatActivity {
                 updateTime();
             }
         });
-       AlarmOnOff.setOnClickListener(new View.OnClickListener() {
+
+        AlarmOnOff.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                if(!AlarmOnOff.isChecked()){
-                   onOff = sharedPref.getBoolean("onOff", false);
                    Intent intent = new Intent(alarmSetActivity.this, Alarm_Receiver.class);
                    pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intent,0);
                    AlarmManager alarmmanager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -97,8 +104,8 @@ public class alarmSetActivity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            final SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
-            final SharedPreferences.Editor editor = sharedPref.edit();
+            SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
 
                 dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 dateTime.set(Calendar.MINUTE, minute);
@@ -122,6 +129,24 @@ public class alarmSetActivity extends AppCompatActivity {
 
         }
     };
+    public void onCheck(View view){
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        boolean checked = ((Switch) view).isChecked();
+        switch(view.getId()){
+            case R.id.RainIO:
+                if (checked){
+                    RainOnOff = true;
+                    editor.putBoolean("RainOnOff", true);
+                    editor.commit();
+                }else{
+                    RainOnOff = false;
+                    editor.putBoolean("RainOnOff", false);
+                    editor.commit();
+                }
+                break;
+        }
+    }
 
 
 }
