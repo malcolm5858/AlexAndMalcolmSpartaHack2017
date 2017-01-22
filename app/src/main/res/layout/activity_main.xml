@@ -24,11 +24,5 @@
             android:onClick="openAlarmSet"
             android:text="@string/bt1" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:onClick="openSettings"
-            android:text="@string/btn3" />
     </LinearLayout>
 </RelativeLayout>

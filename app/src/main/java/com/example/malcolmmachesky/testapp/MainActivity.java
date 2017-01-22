@@ -22,10 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        soothing = intent.getBooleanExtra(settingsActivity.MESSAGE,false);
-        minuteAlert = intent.getBooleanExtra(settingsActivity.MESSAGEALERT, false);
-        snooze = intent.getBooleanExtra(settingsActivity.MESSAGESNOOZE, false);
-        cantStop = intent.getBooleanExtra(settingsActivity.MESSAGECANTSTOP, false);
+
 
     }
 
@@ -35,13 +32,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void openSettings(View view){
-        Intent intent = new Intent(this, settingsActivity.class);
-        intent.putExtra(MESSAGE, soothing);
-        intent.putExtra(MESSAGEALERT, minuteAlert);
-        intent.putExtra(MESSAGESNOOZE, snooze);
-        intent.putExtra(MESSAGECANTSTOP, cantStop);
-        startActivity(intent);
-    }
 
 }
