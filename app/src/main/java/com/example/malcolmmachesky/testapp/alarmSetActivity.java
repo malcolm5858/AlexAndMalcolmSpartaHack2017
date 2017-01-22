@@ -34,7 +34,6 @@ public class alarmSetActivity extends AppCompatActivity {
     public Boolean RainOnOff = false;
    // final MediaPlayer mp = MediaPlayer.create(this, R.raw.spartahackrain);
 
-    Switch RainIO = (Switch)this.findViewById(R.id.RainIO);
 
     public static alarmSetActivity instance(){
         return inst;
@@ -60,8 +59,8 @@ public class alarmSetActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if(RainOnOff){
             ((Switch) findViewById(R.id.RainIO)).setChecked(true);
-                  //  Log.v("OnCreate", "Playing sound...");
-                //    mp.start();
+                 //  Log.v("OnCreate", "Playing sound...");
+                  // mp.start();
 
         }
         else {
@@ -147,11 +146,11 @@ public class alarmSetActivity extends AppCompatActivity {
                 if (checked){
                     RainOnOff = true;
                     editor.putBoolean("RainOnOff", true);
-                    editor.commit();
+                    editor.apply();
                 }else{
                     RainOnOff = false;
                     editor.putBoolean("RainOnOff", false);
-                    editor.commit();
+                    editor.apply();
                 }
                 break;
         }
