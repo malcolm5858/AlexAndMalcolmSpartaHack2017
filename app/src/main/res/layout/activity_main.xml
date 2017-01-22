@@ -27,13 +27,6 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:onClick="openAmbientSounds"
-            android:text="@string/btn2" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/button3"
             android:onClick="openSettings"
             android:text="@string/btn3" />
