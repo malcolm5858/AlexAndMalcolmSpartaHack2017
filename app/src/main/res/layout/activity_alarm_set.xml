@@ -55,4 +55,60 @@
         android:layout_alignTop="@+id/button4"
         android:layout_alignStart="@+id/AlarmOnOff" />
 
+    <Button
+        android:text="@string/SleepTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:id="@+id/SleepTime" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Sleep1" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:id="@+id/Sleep6"
+        android:layout_alignStart="@+id/Sleep5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:id="@+id/Sleep4"
+        android:layout_below="@+id/Sleep3"
+        android:layout_alignStart="@+id/Sleep3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/Sleep5"
+        android:layout_below="@+id/Sleep4"
+        android:layout_alignStart="@+id/Sleep4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:id="@+id/Sleep3"
+        android:layout_below="@+id/Sleep2"
+        android:layout_alignStart="@+id/Sleep2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/Sleep2"
+        android:layout_below="@+id/Sleep1"
+        android:layout_alignStart="@+id/Sleep1" />
+
 </RelativeLayout>
