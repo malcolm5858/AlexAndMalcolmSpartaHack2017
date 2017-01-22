@@ -32,7 +32,7 @@ public class alarmSetActivity extends AppCompatActivity {
     AlarmManager alarmManager;
     public static alarmSetActivity inst;
     public Boolean RainOnOff = false;
-    MediaPlayer mp = MediaPlayer.create(this, R.raw.spartahackrain);
+  //  MediaPlayer mp = MediaPlayer.create(this, R.raw.spartahackrain);
 
 
     public static alarmSetActivity instance(){
@@ -60,12 +60,13 @@ public class alarmSetActivity extends AppCompatActivity {
         if(RainOnOff){
             ((Switch) findViewById(R.id.RainIO)).setChecked(true);
                  //  Log.v("OnCreate", "Playing sound...");
-                   mp.start();
+         //   mp.start();
+         //   mp.isLooping();
 
         }
         else {
             ((Switch) findViewById(R.id.RainIO)).setChecked(false);
-            mp.stop();
+          //  mp.stop();
         }
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
