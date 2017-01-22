@@ -32,13 +32,13 @@ public class Alarm_Receiver extends WakefulBroadcastReceiver{
         final Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
         if(!ringtone.isPlaying()) {
             new CountDownTimer(30000,1000){
-
-                void OnFinish(){
+                public void onTick(long millisUntilFinished) {
+                    ringtone.play();
+                }
+                public void onFinish(){
                     ringtone.stop();
                 }
-            }.start;
-            ringtone.play();
-
+            }.start();
 
         }
         else if (ringtone.isPlaying()){
