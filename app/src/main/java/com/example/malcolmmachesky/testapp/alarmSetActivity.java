@@ -142,14 +142,14 @@ public class alarmSetActivity extends AppCompatActivity {
         if(Hour > 12){
             Hour -= 12;
             timeAlarm.setText(Hour + ":" + Minute + " PM");
-            int modHour = Hour + 12;
-            int modMinute = Minute;
+            modHour = Hour + 12;
+            modMinute = Minute;
 
         }
         else {
             timeAlarm.setText(Hour + ":" + Minute + " AM");
-            int modHour = Hour;
-            int modMinute = Minute;
+            modHour = Hour;
+            modMinute = Minute;
         }
     }
 
