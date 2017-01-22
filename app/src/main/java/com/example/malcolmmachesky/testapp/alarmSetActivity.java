@@ -28,6 +28,7 @@ public class alarmSetActivity extends AppCompatActivity {
     private Button startTimePicker;
     private TextView timeAlarm;
     private Switch AlarmOnOff;
+    private Switch RainIO;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
     public static alarmSetActivity inst;
@@ -55,6 +56,7 @@ public class alarmSetActivity extends AppCompatActivity {
         startTimePicker = (Button) findViewById(R.id.TimePickerStart);
         timeAlarm = (TextView) findViewById(R.id.alarmTime);
         AlarmOnOff = (Switch) findViewById(R.id.AlarmOnOff);
+        RainIO = (Switch) findViewById(R.id.AlarmOnOff);
         RainOnOff = sharedPref.getBoolean("RainOnOff", false);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         mp = MediaPlayer.create(this, R.raw.spartahackrain);
@@ -62,12 +64,23 @@ public class alarmSetActivity extends AppCompatActivity {
             ((Switch) findViewById(R.id.RainIO)).setChecked(true);
                  //  Log.v("OnCreate", "Playing sound...");
           mp.start();
-            mp.isLooping();
+            mp.setLooping(true);
 
         }
-        else {
+        else if (!RainOnOff) {
             ((Switch) findViewById(R.id.RainIO)).setChecked(false);
-           mp.stop();
+         //   mp.setLooping(false);
+         //  mp.stop();
+        }
+        if (RainIO.isChecked()){
+        //    mp.start();
+        //    mp.setLooping(true);
+
+        }
+        else if (!RainIO.isChecked()){
+       //     mp.setLooping(false);
+       //     mp.stop();
+       //     mp.reset();
         }
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
@@ -149,10 +162,12 @@ public class alarmSetActivity extends AppCompatActivity {
                     RainOnOff = true;
                     editor.putBoolean("RainOnOff", true);
                     editor.apply();
+                 //   mp.start();
                 }else{
                     RainOnOff = false;
                     editor.putBoolean("RainOnOff", false);
                     editor.apply();
+                   // mp.stop();
                 }
                 break;
         }

@@ -29,7 +29,7 @@ public class RingtonePlayerService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendNotification("Wake up Malcolm you sleepy head, you have not had enough sleep and need some, but not right now!");
+        sendNotification("GO TO SLEEP MALCOLM, NOW ! ! !");
     }
 
     private void sendNotification(String msg){
