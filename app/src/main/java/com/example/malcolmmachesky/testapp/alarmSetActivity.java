@@ -17,6 +17,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 
 
+import java.io.IOException;
 import java.util.Calendar;
 
 
@@ -34,8 +35,8 @@ public class alarmSetActivity extends AppCompatActivity {
     public static alarmSetActivity inst;
     public Boolean RainOnOff = false;
     MediaPlayer mp;
-
-
+    public boolean canTurnOnMusic;
+    public  boolean musicOn;
     public static alarmSetActivity instance(){
         return inst;
     }
@@ -49,6 +50,8 @@ public class alarmSetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        canTurnOnMusic = false;
+        musicOn = false;
         SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
         setTitle("Alarm Set");
         super.onCreate(savedInstanceState);
@@ -56,32 +59,23 @@ public class alarmSetActivity extends AppCompatActivity {
         startTimePicker = (Button) findViewById(R.id.TimePickerStart);
         timeAlarm = (TextView) findViewById(R.id.alarmTime);
         AlarmOnOff = (Switch) findViewById(R.id.AlarmOnOff);
-        RainIO = (Switch) findViewById(R.id.AlarmOnOff);
+        RainIO = (Switch) findViewById(R.id.RainIO);
         RainOnOff = sharedPref.getBoolean("RainOnOff", false);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         mp = MediaPlayer.create(this, R.raw.spartahackrain);
-        if(RainOnOff){
-            ((Switch) findViewById(R.id.RainIO)).setChecked(true);
-                 //  Log.v("OnCreate", "Playing sound...");
-          mp.start();
-            mp.setLooping(true);
+        RainIO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(RainIO.isChecked()){
+                    canTurnOnMusic = true;
+                }
+                else{
+                    canTurnOnMusic = false;
+                }
+            }
+        });
 
-        }
-        else if (!RainOnOff) {
-            ((Switch) findViewById(R.id.RainIO)).setChecked(false);
-         //   mp.setLooping(false);
-         //  mp.stop();
-        }
-        if (RainIO.isChecked()){
-        //    mp.start();
-        //    mp.setLooping(true);
 
-        }
-        else if (!RainIO.isChecked()){
-       //     mp.setLooping(false);
-       //     mp.stop();
-       //     mp.reset();
-        }
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +100,22 @@ public class alarmSetActivity extends AppCompatActivity {
 
     }
 
+
+    public void turnOnOffMusic(View view){
+        if (musicOn){
+            mp.start();
+            musicOn = false;
+        }
+        else if(canTurnOnMusic){
+            mp.stop();
+            try {
+                mp.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            musicOn = true;
+        }
+    }
 
     private void outputTime(){
         if(Hour > 12){

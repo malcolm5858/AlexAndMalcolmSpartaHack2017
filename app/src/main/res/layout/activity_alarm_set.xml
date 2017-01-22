@@ -44,15 +44,15 @@
         android:layout_marginTop="28dp"
         android:id="@+id/button4"
         android:layout_alignStart="@+id/TimePickerStart"
-        android:layout_alignEnd="@+id/TimePickerStart" />
+        android:layout_alignEnd="@+id/TimePickerStart"
+        android:onClick="turnOnOffMusic" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/RainIO"
         android:onClick="onCheck"
-        android:layout_alignBaseline="@+id/button4"
-        android:layout_alignBottom="@+id/button4"
+        android:layout_alignTop="@+id/button4"
         android:layout_alignStart="@+id/AlarmOnOff" />
 
 </RelativeLayout>
