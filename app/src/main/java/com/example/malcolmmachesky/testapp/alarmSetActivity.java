@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.media.MediaPlayer;
+import android.util.Log;
+
 
 import java.util.Calendar;
 
@@ -29,6 +32,9 @@ public class alarmSetActivity extends AppCompatActivity {
     AlarmManager alarmManager;
     public static alarmSetActivity inst;
     public Boolean RainOnOff = false;
+   // final MediaPlayer mp = MediaPlayer.create(this, R.raw.spartahackrain);
+
+    Switch RainIO = (Switch)this.findViewById(R.id.RainIO);
 
     public static alarmSetActivity instance(){
         return inst;
@@ -54,10 +60,13 @@ public class alarmSetActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if(RainOnOff){
             ((Switch) findViewById(R.id.RainIO)).setChecked(true);
+                  //  Log.v("OnCreate", "Playing sound...");
+                //    mp.start();
 
         }
         else {
             ((Switch) findViewById(R.id.RainIO)).setChecked(false);
+          //  mp.stop();
         }
 
         startTimePicker.setOnClickListener(new View.OnClickListener() {
