@@ -28,6 +28,7 @@ public class alarmSetActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
     public static alarmSetActivity inst;
+    public Boolean onOff;
 
     public static alarmSetActivity instance(){
         return inst;
@@ -62,6 +63,7 @@ public class alarmSetActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                if(!AlarmOnOff.isChecked()){
+                   onOff = sharedPref.getBoolean("onOff", false);
                    Intent intent = new Intent(alarmSetActivity.this, Alarm_Receiver.class);
                    pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, intent,0);
                    AlarmManager alarmmanager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -107,12 +109,15 @@ public class alarmSetActivity extends AppCompatActivity {
                 outputTime();
 
                 if(AlarmOnOff.isChecked()){
+                    editor.putBoolean("onOff", true);
+                    editor.apply();
                     Intent myIntent = new Intent(alarmSetActivity.this, Alarm_Receiver.class);
                     pendingIntent = PendingIntent.getBroadcast(alarmSetActivity.this, 0, myIntent,0);
                     alarmManager.setExact(AlarmManager.RTC, dateTime.getTimeInMillis(), pendingIntent);
+
                 }
                 else{
-                    alarmManager.cancel(pendingIntent);
+
                 }
 
         }
